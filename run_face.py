@@ -7,14 +7,23 @@ path_List = []
 
 
 def parseFiles():
+    # function to parse through image dataset for model training
     pass
 
 
 def face_detect():
+    # function to detect, and return face array from image stream
     pass
 
 def face_encode():
+    # function to return face encodings for given image frame
     pass
+
+def recognize():
+    # function to return match for encoding for given detected face
+    pass
+
+
 
 #################################################################################################################################################################################
 ##                                                                               Test Code                                                                                     ##
