@@ -1,8 +1,9 @@
-# Attendance-with-Facial-Recognition
-# An attendance system based on Facial recognition system. 
+# <font style="color:red">Attendance-with-Facial-Recognition</font>
+## An attendance system based on Facial recognition system. 
+<hr>
 
-
-## The proposed system will have the following features : 
+### The proposed system will have the following features : 
+<hr>
 
 1. Realtime face detection from camera
 2. Face recognition
