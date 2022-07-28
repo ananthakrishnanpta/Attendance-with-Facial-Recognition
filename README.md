@@ -2,7 +2,7 @@
 ## <font style="color:#aa0000">**Attendance-with-Facial-Recognition**</font>
 <hr width="40%" align="left">
      An attendance system based on Facial recognition system. 
-<hr>
+<hr width = "40%" align ="right">
 
 ### **The proposed system will have the following features :**
 <hr>
