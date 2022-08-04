@@ -47,9 +47,10 @@ def markAttendance(name):
             now = datetime.now()
             dtString = now.strftime('%H:%M:%S')
             f.writelines(f'\n{name},{dtString}')
+            print(f"{name} signed in at {dtString}")
 
 
-        print(myDataList)
+        # print(myDataList)
 
 
 
