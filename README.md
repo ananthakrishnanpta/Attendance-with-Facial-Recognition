@@ -22,7 +22,14 @@
 ---
 ---
 
-### 
+### **Approach**
+    - Faces are detected and face locations recorded.
+    - Encodings of detected faces for training are stored.
+    - Faces detected from live camera feed.
+    - Detected faces are encoded
+    - encodings compared and matches detected.
+    - On matches, employee name and timestamp are recorded and written into file.
+
 Results:
 
     - Can identify employees and mark their attendance with less than a second's time.
@@ -32,7 +39,8 @@ Results:
 Limitations of using the proposed model:
 
     - Lack of high accuracy because of less number of training images given.
-    - This model is based on comparison of single image encoding and the distance comparison of encoding of detected face and hence depends on a single set of encodings. Other face features are not taken into consideration to increase response time in limited system resources.
+    - This model is based on comparison of single image encodings
+    -  Other face features are not taken into consideration to increase response time in limited system resources.
 
 
 ---
