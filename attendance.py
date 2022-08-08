@@ -9,28 +9,28 @@ from datetime import datetime
 
 path = 'dataset'
 images = []
-classNames = []
+empName = []
 
-myList = os.listdir(path)
+paths_list = os.listdir(path)
 
-print(myList)
+print(paths_list)
 
-for cl in myList:
-    curImg = cv2.imread(f'{path}/{cl}')
-    images.append(curImg)
-    classNames.append(os.path.splitext(cl)[0])
+for person in paths_list:
+    imgFrame = cv2.imread(f'{path}/{person}')
+    images.append(imgFrame)
+    empName.append(os.path.splitext(person)[0])
 
-# print(classNames)
+# print(empName)
 
 def findEncodings(images):
-    encodeList = []
+    faces_encode_list = []
     for img in images:
         img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
         
         encode = fr.face_encodings(img)[0]
-        encodeList.append(encode)
+        faces_encode_list.append(encode)
 
-    return encodeList
+    return faces_encode_list
 
 
 def markAttendance(name):
@@ -61,56 +61,56 @@ cap = cv2.VideoCapture(0)
 
 while True:
     success, img = cap.read()
-    imgS = cv2.resize(img,(0,0),None,0.25,0.25)
-    imgS = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
-    facesCurFrame = fr.face_locations(imgS)
-    encodeCurFrame = fr.face_encodings(imgS,facesCurFrame)
+    capturedSource = cv2.resize(img,(0,0),None,0.25,0.25)
+    capturedSource = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
+    facesCurFrame = fr.face_locations(capturedSource)
+    encodeCurFrame = fr.face_encodings(capturedSource,facesCurFrame)
 
     for encodeFace,faceLoc in zip(encodeCurFrame, facesCurFrame):
 
         matches = fr.compare_faces(encodeListKnown, encodeFace)
-        faceDis = fr.face_distance(encodeListKnown, encodeFace)
-        # print(faceDis)
+        face_distances = fr.face_distance(encodeListKnown, encodeFace)
+        # print(face_distances)
 
-        matchIndex = np.argmin(faceDis) 
+        indicesMatch = np.argmin(face_distances) 
 
-        if matches[matchIndex]:
-            if faceDis[matchIndex] < 0.50:
-                name = classNames[matchIndex].upper()
+        if matches[indicesMatch]:
+            if face_distances[indicesMatch] < 0.50:
+                name = empName[indicesMatch].upper()
                 markAttendance(name)
             else:
                 name = 'Unknown'
             # print(name)
 
-            y1,x2,y2,x1 = faceLoc
-            y1,x2,y2,x1 = y1 * 4 ,x2*4 ,y2*4 ,x1 * 4
-            # cv2.rectangle(img,(x1,y1),(x2,y2),(255,0,0),3)
-            # cv2.rectangle(img,(x1,y2-35),(x2,y2),(0,255,0),cv2.FILLED)
-            # cv2.putText(img,name,(x1+6, y2 - 6),cv2.FONT_HERSHEY_COMPLEX,1,(255,255,255),2)
+            top,right,bottom,left = faceLoc
+            top,right,bottom,left = top * 4 ,right*4 ,bottom*4 ,left * 4
+            # cv2.rectangle(img,(left,top),(right,bottom),(255,0,0),3)
+            # cv2.rectangle(img,(left,bottom-35),(right,bottom),(0,255,0),cv2.FILLED)
+            # cv2.putText(img,name,(left+6, bottom - 6),cv2.FONT_HERSHEY_COMPLEX,1,(255,255,255),2)
             # ##
-            cv2.rectangle(img, (y1, x2), (x1 + y1, x2 + y2), (0, 255, 0), 2)
-            cv2.putText(img, name, (y1, x2), cv2.FONT_HERSHEY_SIMPLEX,0.75, (0, 255, 0), 2)
+            cv2.rectangle(img, (top, right), (left + top, right + bottom), (0, 255, 0), 2)
+            cv2.putText(img, name, (top, right), cv2.FONT_HERSHEY_SIMPLEX,0.75, (0, 255, 0), 2)
             # markAttendance(name)
         # cv2.rectangle(img,(faceLoc[3],faceLoc[0],faceLoc[1],faceLoc[2]),(0,255,0),2)
         
-        # cv2.rectangle(img,(x1,y1,x2,y2),(0,255,0),2)
+        # cv2.rectangle(img,(left,top,right,bottom),(0,255,0),2)
        
     
     cv2.imshow('Attendance Management System',img)
     cv2.waitKey(1)
         
 #########################################
-# for cl in enumerate(myList):
-#     for image in cl:
-#         # currImg = cv2.imread(f'{pathlib}/{cl}/')
-#         cLocation = f'{pathlib}/{cl}/{image}'
+# for person in enumerate(paths_list):
+#     for image in person:
+#         # currImg = cv2.imread(f'{pathlib}/{person}/')
+#         cLocation = f'{pathlib}/{person}/{image}'
 #         # print(cLocation)
 
 #         currImg = cv2.imread(f'cLocation')
 
         
 #         images.append(currImg)
-#         Names.append(os.path.splitext(cl)[0])
+#         Names.append(os.path.splitext(person)[0])
 #         # print(Names)
 #         # print(images)
 #         # cv2.imshow('img',currImg)
