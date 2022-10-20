@@ -41,6 +41,8 @@ Limitations of using the proposed model:
     - Lack of high accuracy because of less number of training images given.
     - This model is based on comparison of single image encodings
 
+---
 
+Thank you ...
 
 ---
